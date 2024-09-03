@@ -12,33 +12,20 @@ data_structure = [
 
 
 def cycle(data):
+    global sum
     if isinstance(data, numbers.Number):
-        number_sum(data)
+        sum += data
     elif isinstance(data, str):
-        length_string_sum(data)
+        sum += len(data)
     elif isinstance(data, dict):
-        calculating_dict(data)
+        for value in data.values():
+            cycle(value)
+        for key in data.keys():
+            cycle(key)
     else:
         for item in data:
             cycle(item)
 
-
-def calculating_dict(dictionary):
-    if isinstance(dictionary, dict):
-        for value in dictionary.values():
-            cycle(value)
-        for key in dictionary.keys():
-            cycle(key)
-
-
-def number_sum(number):
-    global sum
-    sum += number
-
-
-def length_string_sum(string):
-    global sum
-    sum += len(string)
 
 
 cycle(data_structure)
